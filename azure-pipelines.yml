@@ -18,7 +18,7 @@ steps:
    inputs:
       provider: 'azurerm'
       command: 'init'
-      workingDirectory: '$(System.DefaultWorkingDirectory)\terraform-resources'
+      workingDirectory: '$(System.DefaultWorkingDirectory)/terraform-resources/'
       backendServiceArm: 'Azureportal-devops-sc'
       backendAzureRmResourceGroupName: 'rg-tfstate'
       backendAzureRmStorageAccountName: 'sgtfstatefile'
@@ -30,5 +30,5 @@ steps:
     inputs:
       provider: 'azurerm'
       command: 'plan'
-      workingDirectory: '$(System.DefaultWorkingDirectory)\terraform-resources'
+      workingDirectory: '$(System.DefaultWorkingDirectory)/terraform-resources/'
       environmentServiceNameAzureRM: 'Azureportal-devops-sc'
