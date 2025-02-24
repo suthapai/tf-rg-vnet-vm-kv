@@ -25,6 +25,13 @@ steps:
       backendAzureRmContainerName: 'mytfstate'
       backendAzureRmKey: 'terraform.tfsatate'
 
+ -   task: AzureKeyVault@2
+     displayName: "key vault integration"
+     inputs:
+      azureSubscription: 'Azureportal-devops-sc'
+      KeyVaultName: 'iac-test12'
+      SecretsFilter: '*'
+      RunAsPreJob: true
  -  task: TerraformTaskV4@4
     displayName: "terraform plan"
     inputs:
