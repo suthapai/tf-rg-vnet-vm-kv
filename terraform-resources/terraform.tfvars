@@ -14,7 +14,7 @@ subnet_AddressList = ["178.29.192.0/26", "178.29.192.64/26", "178.29.192.128/26"
 
 ### Linux Virtual Machine Deployment
 
-virtual_machine_Usr    = "my-user"
+virtual_machine_Usr    = "my-user1"
 virtual_machine_Passwd = "blob"
 
 nic                    = "win_vm_nic"
