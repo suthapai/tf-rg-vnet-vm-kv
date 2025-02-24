@@ -23,10 +23,7 @@ resource "azurerm_linux_virtual_machine" "example" {
     azurerm_network_interface.nic.id,
   ]
 
-  admin_ssh_key {
-    username   = var.username
-    public_key = file("~/.ssh/id_rsa.pub")
-  }
+ 
 
   os_disk {
     storage_account_type = var.vm_os_disk_strg_type
