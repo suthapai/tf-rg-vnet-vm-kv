@@ -10,28 +10,25 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- task: TerraformInstaller@1
-  inputs:
-    terraformVersion: 'latest'
+ - task: TerraformInstaller@1
+   inputs:
+     terraformVersion: 'latest'
+ - task: TerraformTaskV4@4
+   displayName: "terraform init"
+   inputs:
+      provider: 'azurerm'
+      command: 'init'
+      workingDirectory: '$(System.DefaultWorkingDirectory)\terraform-resources'
+      backendServiceArm: 'Azureportal-devops-sc'
+      backendAzureRmResourceGroupName: 'rg-tfstate'
+      backendAzureRmStorageAccountName: 'sgtfstatefile'
+      backendAzureRmContainerName: 'mytfstate'
+      backendAzureRmKey: 'terraform.tfsatate'
 
-- task: TerraformTaskV4@4
-  displayName: "terraform init"
-  inputs:
-    provider: 'azurerm'
-    command: 'init'
-    backendServiceArm: 'Azureportal-devops-sc'
-    backendAzureRmResourceGroupName: 'rg-tfstate'
-    backendAzureRmStorageAccountName: 'sgtfstatefile'
-    backendAzureRmContainerName: 'mytfstate'
-    backendAzureRmKey: 'terraform.tfstate'
-- task: TerraformTaskV4@4
-  displayName : "terraform validate"
-  inputs:
-    provider: 'azurerm'
-    command: 'validate'
-- task: TerraformTaskV4@4
-  displayName: "terraform plan"
-  inputs:
-    provider: 'azurerm'
-    command: 'plan'
-    environmentServiceNameAzureRM: 'Azureportal-devops-sc'
+ -  task: TerraformTaskV4@4
+    displayName: "terraform plan"
+    inputs:
+      provider: 'azurerm'
+      command: 'plan'
+      workingDirectory: '$(System.DefaultWorkingDirectory)\terraform-resources'
+      environmentServiceNameAzureRM: 'Azureportal-devops-sc'
