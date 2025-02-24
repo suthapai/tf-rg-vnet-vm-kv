@@ -26,7 +26,7 @@ steps:
       backendAzureRmKey: 'terraform.tfsatate'
 
  -   task: AzureKeyVault@2
-     displayName: "key vault integration"
+     displayName: "KV integration"
      inputs:
       azureSubscription: 'Azureportal-devops-sc'
       KeyVaultName: 'iac-test12'
