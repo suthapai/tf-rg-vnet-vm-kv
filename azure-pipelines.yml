@@ -31,7 +31,7 @@ steps:
       azureSubscription: 'Azureportal-devops-sc'
       KeyVaultName: 'iac-test12'
       SecretsFilter: '*'
-      RunAsPreJob: true
+      RunAsPreJob: false
  -  task: TerraformTaskV4@4
     displayName: "terraform plan"
     inputs:
