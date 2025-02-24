@@ -38,10 +38,14 @@ steps:
       provider: 'azurerm'
       command: 'plan'
       workingDirectory: '$(System.DefaultWorkingDirectory)/terraform-resources/'
+      
+ -   task: TerraformTaskV4@4
+     displayName: "terraform apply"
+     inputs:
+      provider: 'azurerm'
+      command: 'apply'
+      workingDirectory: '$(System.DefaultWorkingDirectory)/terraform-resources/'
+      commandOptions: '-auto-approve'
       environmentServiceNameAzureRM: 'Azureportal-devops-sc'
- - task: TerraformTaskV4@4
-   inputs:
-     provider: 'azurerm'
-     command: 'apply'
-     commandOptions: '-auto-approve'
-     environmentServiceNameAzureRM: 'Azureportal-devops-sc'
+  
+  
