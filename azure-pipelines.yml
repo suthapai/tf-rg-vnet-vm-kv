@@ -35,9 +35,3 @@ steps:
     provider: 'azurerm'
     command: 'plan'
     environmentServiceNameAzureRM: 'Azureportal-devops-sc'
-- task: TerraformTaskV4@4
-  displayName: "terraform apply"
-  inputs:
-    provider: 'azurerm'
-    command: 'apply'
-    environmentServiceNameAzureRM: 'Azureportal-devops-sc'
