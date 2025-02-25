@@ -1,0 +1,46 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+stages:
+ - stage: "Destroy" 
+   jobs:
+     - job: destroy
+       steps:
+   
+        - task: TerraformInstaller@1
+          inputs:
+            terraformVersion: 'latest'
+        - task: TerraformTaskV4@4
+          displayName: "terraform init"
+          inputs:
+              provider: 'azurerm'
+              command: 'init'
+              workingDirectory: '$(System.DefaultWorkingDirectory)/terraform-resources/'
+              backendServiceArm: 'Azureportal-devops-sc'
+              backendAzureRmResourceGroupName: 'rg-tfstate'
+              backendAzureRmStorageAccountName: 'sgtfstatefile'
+              backendAzureRmContainerName: 'mytfstate'
+              backendAzureRmKey: 'terraform.tfsatate'
+
+        -   task: AzureKeyVault@2
+            displayName: "KV integration"
+            inputs:
+              azureSubscription: 'Azureportal-devops-sc'
+              KeyVaultName: 'iac-test12'
+              SecretsFilter: '*'
+              RunAsPreJob: false
+      
+        - task: TerraformTaskV4@4
+          inputs:
+            provider: 'azurerm'
+            command: 'destroy'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/terraform-resources/'
+            commandOptions: '-auto-approve'
+            environmentServiceNameAzureRM: 'Azureportal-devops-sc'
