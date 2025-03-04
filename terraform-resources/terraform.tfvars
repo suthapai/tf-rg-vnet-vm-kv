@@ -1,4 +1,4 @@
-subscription_id = "2f988b10-9ba2-4c26-8472-c863d0ff88e4"
+subscription_id = "your subscription id"
 ## Pre Defined KV for storing secret
 devKV_Name         = "iac-test12"       #### We have to change as per env
 kv-rg-name         = "Blog_RG"
